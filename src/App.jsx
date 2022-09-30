@@ -1,12 +1,18 @@
 import React from 'react';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/header/Header';
+import Main from './screens/Main';
 
 function App() {
   return (
     <>
-      <Header/>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Main />} />
+          {/* <Route path=":id" element={<User />} /> */}
+        </Route>
+      </Routes>
     </>
   );
 }

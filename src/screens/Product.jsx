@@ -3,41 +3,43 @@ import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { Col } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import Header from "../components/header/Header";
+import ProductCard from "../components/productCard/ProductCard";
 
 function Product() {
   const params = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState([]);
+
+  const getAProduct = () => {
+    fetch(`https://dummyjson.com/products/${params.id}`)
+        .then((response) => response.json())
+        .then((data) => setPost([...post, data]))
+  }
 
   useEffect(() => {
     if (params?.id) {
-      fetch(`https://jsonplaceholder.typicode.com/posts?userId=${params.id}`)
-        .then((response) => response.json())
-        .then((data) => setPost(data));
+      getAProduct()      
     }
   }, []);
 
+  console.log(post)
+
   return (
-    <Container>
-      <Row>
-        {post?.map((post) => {
+    <>
+      <Header/>
+      <Container>
+      <Row className="mt-5">
+        {
+        post?.map(item => {
           return (
-            <Col xs={4}>
-              <Card style={{ width: "20rem" }} key={post.id}>
-                <Card.Body>
-                  <Card.Title>
-                     {post.title}
-                  </Card.Title>
-                  <Card.Text> User: {post.userId} post</Card.Text>
-                  <Card.Text>{post.body}</Card.Text>
-                  <Card.Text>Post ID:{post.id}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+           <ProductCard thumbnail={item.thumbnail} price={item.price} title={item.title} description={item.description} id={item.id} key={`product${item.id}`}/>
           );
-        })}
+        })
+        }
       </Row>
     </Container>
+    </>
+    
   );
 }
 

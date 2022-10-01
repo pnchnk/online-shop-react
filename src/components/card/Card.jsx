@@ -1,13 +1,43 @@
 import React from "react";
 import './card.css'
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons'
 
-function Card({thumbnail, price, title }) {
+function Card({thumbnail, price, title, id, product }) {
+
+    const getRating = (product) => {
+        if (product.rating > 4 && product.rating < 4.5) {
+            return (
+                <>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStarHalf}/>                    
+                </>
+            )
+        }
+        if (product.rating > 4.5 && product.rating < 5) {
+            return (
+                <>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                    <FontAwesomeIcon icon={faStar}/>
+                </>
+            )
+        }
+    };
+
     return (
-        <div className="col mb-5">
+        <Link to={`${id}`}>
+            <div className="col mb-5">
             <div className="card h-100">
                 <a
                     className="img-link"
-                    href="./product.html"
+                    
                 >
                     <img
                         className="card-img-top"
@@ -19,8 +49,12 @@ function Card({thumbnail, price, title }) {
                     <div className="text-center">
                         <h5 className="fw-bolder"></h5>
                             {title}
-                        <div className="d-flex justify-content-center small text-warning mb-2"></div>
-
+                        <div className="d-flex justify-content-center small text-warning mb-2">
+                            {
+                                getRating(product)
+                            }
+                        </div>
+    
                         <span className="text-decoration-line-through old-price">
                             $
                         </span>
@@ -40,6 +74,7 @@ function Card({thumbnail, price, title }) {
                 </div>
             </div>
         </div>
+        </Link>
     );
 }
 

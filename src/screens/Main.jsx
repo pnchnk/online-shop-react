@@ -17,9 +17,9 @@ function Main() {
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
           {
-               products?.filter(el => el.category === 'smartphones' || el.category === 'laptops')?.sort((a, b) => a.rating - b.rating)?.map(item => {
+               products?.map(item => {
                   return(
-                    <Card key={item.id} thumbnail={item.thumbnail} price={item.price} tile={item.title}/>
+                    <Card id={item.id} key={item.id} thumbnail={item.thumbnail} price={item.price} title={item.title} product={item}/>
                   )              
                })
             }

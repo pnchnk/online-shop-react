@@ -2,13 +2,13 @@ import React from "react";
 
 function Navigation() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/index.html">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container px-4 px-lg-5">
+        <a className="navbar-brand" href="/index.html">
           Main Page
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -16,18 +16,18 @@ function Navigation() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/index.html">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="/index.html">
                 Home
               </a>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 id="navbarDropdown"
                 href="#"
                 role="button"
@@ -36,34 +36,34 @@ function Navigation() {
               >
                 Shop
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a class="dropdown-item" href="/index.html">
+                  <a className="dropdown-item" href="/index.html">
                     All Products
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/smarthpones.html">
+                  <a className="dropdown-item" href="/smarthpones.html">
                     Smartphones
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/laptops.html">
+                  <a className="dropdown-item" href="/laptops.html">
                     Laptops
                   </a>
                 </li>
               </ul>
             </li>
           </ul>
-          <div class="dropdown-button position-relative">
-            <form class="d-flex">
-              <button id="crt-btn" class="btn btn-outline-dark" type="button">
-                <i class="bi-cart-fill me-1"></i>
+          <div className="dropdown-button position-relative">
+            <form className="d-flex">
+              <button id="crt-btn" className="btn btn-outline-dark" type="button">
+                <i className="bi-cart-fill me-1"></i>
                 Cart
-                <span class="js-amount badge bg-dark text-white ms-1 rounded-pill d-none">
+                <span className="js-amount badge bg-dark text-white ms-1 rounded-pill d-none">
                   0
                 </span>
               </button>

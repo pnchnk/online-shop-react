@@ -1,12 +1,15 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 function Navigation() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container px-4 px-lg-5">
-        <a className="navbar-brand" href="/index.html">
+        <Link className="navbar-brand" to={'/'}>
           Main Page
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -21,39 +24,39 @@ function Navigation() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/index.html">
+              <Link className="nav-link active" aria-current="page"to={'/'}>
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
-              <a
+              <Link
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown"
-                href="#"
+                href=""
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Shop
-              </a>
+              </Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="/index.html">
+                  <Link className="dropdown-item" to={"/"}>
                     All Products
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="/smarthpones.html">
+                  <Link className="dropdown-item" to={"/smartphones/"}>
                     Smartphones
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="/laptops.html">
+                  <Link className="dropdown-item" to={"/laptops"}>
                     Laptops
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -61,8 +64,8 @@ function Navigation() {
           <div className="dropdown-button position-relative">
             <form className="d-flex">
               <button id="crt-btn" className="btn btn-outline-dark" type="button">
-                <i className="bi-cart-fill me-1"></i>
-                Cart
+                Cart{' '}
+                <FontAwesomeIcon icon={faCartShopping}/>
                 <span className="js-amount badge bg-dark text-white ms-1 rounded-pill d-none">
                   0
                 </span>

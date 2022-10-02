@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from '../components/header/Header'
 import Card from '../components/card/Card';
 import MyContext from '../context/MyContext';
+import Footer from '../components/footer/Footer';
 
 function Main() {
   const {products, getProducts} = useContext(MyContext);
@@ -25,6 +26,7 @@ function Main() {
             }
           </div>
         </div>
+        <Footer/>
     </>
   )
 }

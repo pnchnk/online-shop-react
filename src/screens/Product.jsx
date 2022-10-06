@@ -11,52 +11,52 @@ import Card from "../components/card/Card";
 function Product() {
   const params = useParams();
 
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState();
 
   const [relevant, setRelevant] = useState();
 
-  const getAProduct = () => {
-    fetch(`https://dummyjson.com/products/${params.id}`)
+  const getAProduct = (id) => {
+    fetch(`https://dummyjson.com/products/${id}`)
       .then((response) => response.json())
-      .then((data) => setProduct([...product, data]));
+      .then((data) => setProduct(data));
   };
 
-  const temp = () => {
-    let tempVar = new Object(...product);
+  const relatedProducts = () => {
+    let tempVar = new Object(product);
     fetch(`https://dummyjson.com/products/category/${tempVar.category}`)
       .then((response) => response.json())
-      .then((data) => data.products.filter((item) => item.id != tempVar.id))
+      .then((data) => data.products.filter((item) => item.id !== tempVar.id))
       .then((filtered) => setRelevant(filtered));
   };
 
   useEffect(() => {
     if (params?.id) {
-      getAProduct();
+      getAProduct(params.id);
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
-    temp();
-    
+    relatedProducts();  
   }, [product]);
+
+  console.log(product);
   
   return (
     <>
       <Header />
       <Container>
         <Row className="mt-5">
-          {product?.map((item) => {
-            return (
+          
               <ProductCard
-                thumbnail={item?.thumbnail}
-                price={item?.price}
-                title={item?.title}
-                description={item?.description}
-                id={item?.id}
-                key={`product${item?.id}`}
+                thumbnail={product?.thumbnail}
+                price={product?.price}
+                title={product?.title}
+                description={product?.description}
+                id={product?.id}
+                key={`product${product?.id}`}
               />
-            );
-          })}
+            
+          
         </Row>
         <Row className="mt-5">
           <h2 className="text-center">You may also like</h2>

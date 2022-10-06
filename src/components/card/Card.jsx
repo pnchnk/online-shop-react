@@ -1,10 +1,15 @@
 import React from "react";
+import { useContext } from "react";
+import MyContext from '../../context/MyContext';
 import "./card.css";
-import { Link, useNavigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 
 function Card({ thumbnail, price, title, id, product }) {
+
+  const {cart, addToCart} = useContext(MyContext);
+
   const getRating = (product) => {
     if (product.rating > 4 && product.rating < 4.5) {
       return (
@@ -30,11 +35,12 @@ function Card({ thumbnail, price, title, id, product }) {
     }
   };
 
+  let currentPrice = Math.round(product?.price - (product?.price * product?.discountPercentage / 100));
+
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate(`/${id}`);
-    // window.location.reload();
   };
 
   return (
@@ -48,8 +54,8 @@ function Card({ thumbnail, price, title, id, product }) {
             <div className="d-flex justify-content-center small text-warning mb-2">
               {getRating(product)}
             </div>
-            <span className="text-decoration-line-through old-price">$</span>
-            <span className="current-price">{price}</span>
+            <span className="text-decoration-line-through old-price">{price}$</span>{' '}
+            <span className="current-price">{currentPrice}$</span>
           </div>
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -57,6 +63,7 @@ function Card({ thumbnail, price, title, id, product }) {
             <button
               type="button"
               className="btn btn-outline-dark mt-auto add-basket"
+              onClick={() => addToCart(product)}
             >
               Add to cart
             </button>

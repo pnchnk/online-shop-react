@@ -8,13 +8,19 @@ import Footer from '../components/footer/Footer';
 function Main() {
   const {products, getProducts} = useContext(MyContext);
 
+  const {cart} = useContext(MyContext);
+
   useEffect(()=> {
     getProducts();
   },[])
 
+  useEffect(() => {
+    console.log(cart)
+  }, [cart])
+
   return (
     <>
-        <Header/>
+        <Header title={"Nikita Shop"}/>
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
           {

@@ -2,11 +2,11 @@ import React from 'react'
 import Navigation from './Navigation'
 import Title from './Title'
 
-function Header() {
+function Header({title}) {
   return (
     <>
         <Navigation/>
-        <Title/>
+        <Title title={title}/>
     </>
   )
 }

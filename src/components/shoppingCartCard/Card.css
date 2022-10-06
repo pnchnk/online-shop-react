@@ -1,0 +1,10 @@
+.cart__item {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.card-img {
+    max-height: 120px;
+    max-width: 150px;
+    object-fit: contain;
+}

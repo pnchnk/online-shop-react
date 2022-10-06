@@ -8,6 +8,7 @@ import Main from './screens/Main';
 import Product from './screens/Product';
 import Smartphones from './screens/Smartphones';
 import Laptops from './screens/Laptops';
+import Cart from './screens/Cart';
 
 function App() {
   let navigate = useNavigate()
@@ -25,6 +26,9 @@ function App() {
         <Route path='/laptops/'>
           <Route index element={<Laptops/>} />
           <Route path=":id" element={<Product/>} />
+        </Route>
+        <Route path='/cart/'>
+          <Route index element={<Cart/>} />
         </Route>
       </Routes>
     </>

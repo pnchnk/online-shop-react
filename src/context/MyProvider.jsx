@@ -6,6 +6,8 @@ function MyProvider({ children }) {
 
     const [products, setProducts] = useState() // all products
 
+    const [cart, setCart] = useState([]) // shopping cart
+
     const getProducts = async () => {
         try {
             const res = await fetch(`https://dummyjson.com/products/`);
@@ -22,8 +24,12 @@ function MyProvider({ children }) {
         setProducts(res);
     };
 
+    const addToCart = (item) => {
+        setCart([...cart, item]);
+    }
 
-    return <MyContext.Provider value={{products, getProducts}}>{children}</MyContext.Provider>;
+
+    return <MyContext.Provider value={{products, getProducts, cart, addToCart}}>{children}</MyContext.Provider>;
 }
 
 export default MyProvider;

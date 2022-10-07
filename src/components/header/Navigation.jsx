@@ -96,6 +96,7 @@ function Navigation() {
                                 className="btn btn-outline-dark"
                                 type="button"
                                 onClick={handleNavigate}
+                                disabled={!cart.length}
                             >
                                 Cart <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="js-amount badge bg-dark text-white ms-1 rounded-pill">

@@ -1,24 +1,24 @@
 import React from "react";
 import CardStyle from "../shoppingCartCard/Card.css";
 
-function Card({ images, title, price }) {
+function Card({ images, title, price, quantity }) {
     return (
-        <div className="row">
+        <div className="cart">
             <div className="cart__item">
                 <div className="col-5 text-center">
                     <img className="card-img" src={images[0]} alt={title} />
                 </div>
-                <div className="col-6 mt-2 text-center overflow-visible">
-                    <h6 className="product-name">${title}</h6>
-                    <div className="text-center">
+                <div className="col-6 mt-2 overflow-visible">
+                    <h6 className="product-name">{title}</h6>
+                    <div>
                         <span className="price">$${price}</span>
                     </div>
                     <div className="product-quantity gy-2">
-                        <div className="cart-item__qty text-center">
+                        <div className="cart-item__qty">
                             <span role="button">-</span>
                             <input
                                 className="product-quantity-input"
-                                value="${quantity}"
+                                value={quantity}
                             ></input>
                             <span
                                 className="add-product-btn-${id}"

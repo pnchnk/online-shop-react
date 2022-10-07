@@ -1,10 +1,30 @@
+.empty-cart {
+    height: 45vh;
+    text-align: center;
+    font-size: 26px;
+}
+
+.cart {
+    margin-bottom: 15px;
+}
+
 .cart__item {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     width: 100%;
+    display: flex;
 }
 
 .card-img {
-    max-height: 120px;
+    min-height: 150px;
     max-width: 150px;
     object-fit: contain;
+}
+
+.product-name {
+    font-size: 18px;
+}
+
+.total {
+    border-top: 1px solid gray;
 }

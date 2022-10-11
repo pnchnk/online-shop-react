@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Header from '../components/header/Header'
 import Card from '../components/card/Card';
 import MyContext from '../context/MyContext';
@@ -8,15 +9,14 @@ import Footer from '../components/footer/Footer';
 function Main() {
   const {products, getProducts} = useContext(MyContext);
 
-  const {cart} = useContext(MyContext);
+  const basket = useSelector(state=> state.basket.basketItems)
+
+  console.log(basket)
 
   useEffect(()=> {
     getProducts();
   },[])
 
-  useEffect(() => {
-    console.log(cart)
-  }, [cart])
 
   return (
     <>

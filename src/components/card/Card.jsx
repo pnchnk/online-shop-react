@@ -1,5 +1,7 @@
 import React from "react";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/slice/basketSlice";
 import MyContext from '../../context/MyContext';
 import "./card.css";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +10,13 @@ import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 
 function Card({ thumbnail, price, title, id, product }) {
 
-  const {cart, addToCart} = useContext(MyContext);
+  // const {cart, addToCart} = useContext(MyContext);
+
+  const dispatch = useDispatch()
+
+  const handleClick = () => { //add to basket
+    dispatch(addToCart(product))
+  };
 
   const getRating = (product) => {
     if (product.rating > 4 && product.rating < 4.5) {
@@ -63,7 +71,7 @@ function Card({ thumbnail, price, title, id, product }) {
             <button
               type="button"
               className="btn btn-outline-dark mt-auto add-basket"
-              onClick={() => addToCart(product)}
+              onClick={handleClick}
             >
               Add to cart
             </button>

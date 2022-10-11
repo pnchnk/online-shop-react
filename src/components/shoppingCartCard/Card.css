@@ -28,3 +28,8 @@
 .total {
     border-top: 1px solid gray;
 }
+
+.product-quantity-input {
+    width: 40px;
+    text-align: center;
+}

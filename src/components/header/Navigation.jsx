@@ -1,13 +1,13 @@
 import React from "react";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import MyContext from "../../context/MyContext";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 function Navigation() {
-    const { cart } = useContext(MyContext);
+    const basket = useSelector(state=> state.basket?.basketItems)
+    const totalPrice = basket?.reduce((acc, item)=> acc += item.price, 0)
 
     const navigate = useNavigate();
 
@@ -96,11 +96,11 @@ function Navigation() {
                                 className="btn btn-outline-dark"
                                 type="button"
                                 onClick={handleNavigate}
-                                disabled={!cart.length}
+                                disabled={!basket.length}
                             >
                                 Cart <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="js-amount badge bg-dark text-white ms-1 rounded-pill">
-                                    {cart.length}
+                                    {basket.length}
                                 </span>
                             </button>
                         </form>

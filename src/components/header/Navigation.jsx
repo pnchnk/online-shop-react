@@ -7,7 +7,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 function Navigation() {
     const basket = useSelector(state=> state.basket?.basketItems)
-    const totalPrice = basket?.reduce((acc, item)=> acc += item.price, 0)
+    const totalQuantity = basket?.reduce((acc, item)=> acc += item.quantity, 0)
 
     const navigate = useNavigate();
 
@@ -100,7 +100,7 @@ function Navigation() {
                             >
                                 Cart <FontAwesomeIcon icon={faCartShopping} />
                                 <span className="js-amount badge bg-dark text-white ms-1 rounded-pill">
-                                    {basket.length}
+                                    {totalQuantity}
                                 </span>
                             </button>
                         </form>

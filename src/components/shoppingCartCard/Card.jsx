@@ -1,15 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteFromCart, buttonPlus, buttonMinus } from "../../store/slice/basketSlice";
+import { deleteFromCart, buttonPlus, buttonMinus, inputOnChange } from "../../store/slice/basketSlice";
 import "../shoppingCartCard/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function Card({ images, title, price, quantity, discountPercentage, id, product }) {
     const [inputValue, setInputValue] = useState(quantity);
-
+    const input = useRef('')
     const dispatch = useDispatch();
 
     const handleDelete = () => {
@@ -18,16 +18,22 @@ function Card({ images, title, price, quantity, discountPercentage, id, product 
     };
 
     const addOne = () => {
-        dispatch(buttonPlus(product));      
+        dispatch(buttonPlus(product));  
+        window.location.reload(true)     
     };
 
     const minusOne = () => {
-        dispatch(buttonMinus(product));     
+        dispatch(buttonMinus(product));    
+        window.location.reload(true) 
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(inputOnChange({value: inputValue, product: product}))
     }
 
-    const inputQuantity = (e) => {
-        setInputValue(e.target.value)
-    }
+    console.log(inputValue)
+
 
     let currentPrice = Math.round(price - (price * discountPercentage) / 100);
     return (
@@ -48,12 +54,16 @@ function Card({ images, title, price, quantity, discountPercentage, id, product 
                         <div className="cart__qty">
                             <span role="button"
                                 onClick={minusOne}>-{'  '}</span>
+                            <form onSubmit={handleSubmit}>
                             <input
                                 className="product-quantity-input"
-                                value={quantity}
+                                value={inputValue}
+                                ref={input}
+                                onChange={(e) => setInputValue(e.target.value)}
                                 
                                 // maxLength={product.stock}
-                            ></input>
+                            />
+                            </form>
                             <span
                                 className="add-product-btn"
                                 role="button"

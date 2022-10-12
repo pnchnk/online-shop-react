@@ -54,10 +54,16 @@ const basketSlice = createSlice({
       });
     },
     inputOnChange: (state, { payload }) => {
-      
+      const id = payload.product.id
+      const value  = Number(payload.value)
+      state.basketItems?.forEach((el) => {
+        if (el.id === id) {
+          el.quantity = value
+        }
+      });
     },
   },
 });
 
-export const { addToCart, deleteFromCart, buttonPlus, buttonMinus } = basketSlice.actions;
+export const { addToCart, deleteFromCart, buttonPlus, buttonMinus, inputOnChange } = basketSlice.actions;
 export default basketSlice.reducer;

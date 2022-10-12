@@ -5,7 +5,10 @@
 }
 
 .cart {
-    margin-bottom: 15px;
+    margin-bottom: 20px !important;
+    max-width: 60%;
+    margin: auto;
+    position: relative;
 }
 
 .cart__item {
@@ -32,4 +35,22 @@
 .product-quantity-input {
     width: 40px;
     text-align: center;
+}
+
+.cart-item__btn-delete {
+    background-color: black;
+    position: absolute;
+    top: 5px;
+    right: 2%;
+    width: 35px;
+    border-radius: 5px;
+}
+
+.cart-item__btn-delete:hover {
+    cursor: pointer;
+}
+
+.cart-item__delete {
+    color: white;
+    padding: 10px;
 }

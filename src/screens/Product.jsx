@@ -20,14 +20,20 @@ function Product() {
             .then((data) => setProduct(data));
     };
 
-    const relatedProducts = () => {
+    const relatedProducts = async () => {
         let tempVar = new Object(product);
-        fetch(`https://dummyjson.com/products/category/${tempVar.category}`)
-            .then((response) => response.json())
-            .then((data) =>
-                data.products.filter((item) => item.id !== tempVar.id)
-            )
-            .then((filtered) => setRelevant(filtered));
+        try{
+            const res = await  fetch(`https://dummyjson.com/products/category/${tempVar.category}`)
+            const responce = await res.json()
+            const data = await responce.products.filter((item) => item.id !== tempVar.id)
+            if(data?.length > 3){
+                data?.pop()
+            }
+            setRelevant(data)
+           
+        } catch(err){
+            throw new Error
+        }                  
     };
 
     useEffect(() => {
@@ -44,18 +50,20 @@ function Product() {
         <>
             <Header title={product?.title}/>
             <Container>
-                <Row className="mt-5">
+                <Row className="mt-5 product-card ">
                     <ProductCard
                         thumbnail={product?.thumbnail}
                         price={product?.price}
                         title={product?.title}
                         description={product?.description}
                         id={product?.id}
+                        rating={product?.rating}
+                        product={product}
                         key={`product${product?.id}`}
                     />
                 </Row>
-                <Row className="mt-5">
-                    <h2 className="text-center">You may also like</h2>
+                <Row className="mt-5 justify-content-center">
+                    <h3 className="text-center">You may also like</h3>
                     {relevant?.map((item) => {
                         return (
                             <Card

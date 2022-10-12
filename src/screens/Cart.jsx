@@ -29,6 +29,8 @@ function Cart() {
                                 price={product?.price}
                                 discountPercentage={product?.discountPercentage}
                                 quantity={product?.quantity}
+                                id={product?.id}
+                                product={product}
                             />
                         );
                     })}

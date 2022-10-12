@@ -32,8 +32,12 @@ const basketSlice = createSlice({
         // );
       }
     },
+    deleteFromCart: (state, { payload }) => {
+      const {id} = payload;
+      state.basketItems = state.basketItems.filter(item => item.id !== id);
+    }
   },
 });
 
-export const { addToCart } = basketSlice.actions;
+export const { addToCart, deleteFromCart } = basketSlice.actions;
 export default basketSlice.reducer;

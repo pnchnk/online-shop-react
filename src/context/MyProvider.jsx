@@ -27,31 +27,7 @@ function MyProvider({ children }) {
         setProducts(res);
     };
 
-    const addToCart = (item, quantity=1) => {
-       let productID = `product${item.id}`
-      
-        let isInArray = false
-        // cart?.forEach(el => {
-        //     if(el.id === item.id){
-        //         isInArray = true
-        //         localStorage.setItem(productID, (+localStorage.getItem(productID) + +quantity));
-        //         // localStorage.setItem('basket', (+localStorage.getItem('basket') + +quantity))
-        //     }
-        // })
-        // if(!isInArray){
-        //     setCart([...cart, {...item, quantity:1}]);
-        //     localStorage.setItem(productID, (+localStorage.getItem(productID) + +quantity));
-        //     localStorage.setItem(`id${item.id}`, item.id)
-        //     // let tempArr = []
-        //     // localStorage.setItem('basket', JSON.stringify(cart))
-        // }
-        
-    }
-
     
-    // constGetCartProducts = () => {
-        
-    // }
 
     return <MyContext.Provider value={{products, getProducts, cart,  setCart}}>{children}</MyContext.Provider>;
 }

@@ -9,10 +9,6 @@ import Footer from '../components/footer/Footer';
 function Main() {
   const {products, getProducts} = useContext(MyContext);
 
-  const basket = useSelector(state=> state.basket.basketItems)
-
-  console.log(basket)
-
   useEffect(()=> {
     getProducts();
   },[])

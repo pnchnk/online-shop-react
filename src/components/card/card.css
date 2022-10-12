@@ -48,6 +48,18 @@
 }
 
 
+@media (max-width:571px){
+    .card {
+        min-width: 100% !important;
+        max-height: 380px;
+    }
+    .card-img-top {
+        min-height: 135px;
+        background-size: contain !important;
+        background-position: center center;
+    }    
+}
+
 
 
 

@@ -54,3 +54,7 @@
     color: white;
     padding: 10px;
 }
+
+.cart__qty {
+    user-select: none;
+}

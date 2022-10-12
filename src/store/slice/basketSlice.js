@@ -35,9 +35,29 @@ const basketSlice = createSlice({
     deleteFromCart: (state, { payload }) => {
       const {id} = payload;
       state.basketItems = state.basketItems.filter(item => item.id !== id);
-    }
+    },
+    buttonPlus: (state, { payload }) => {
+      state.basketItems?.forEach((el) => {
+        if (el.id === payload.id) {
+          el.quantity++
+        }
+      });
+    },
+    buttonMinus: (state, { payload }) => {
+      state.basketItems?.forEach((el) => {
+        if (el.id === payload.id) {
+          el.quantity--
+        }
+        if (el.quantity === 0){
+          state.basketItems = state.basketItems.filter(item => item.id !== payload.id);
+        }
+      });
+    },
+    inputOnChange: (state, { payload }) => {
+      
+    },
   },
 });
 
-export const { addToCart, deleteFromCart } = basketSlice.actions;
+export const { addToCart, deleteFromCart, buttonPlus, buttonMinus } = basketSlice.actions;
 export default basketSlice.reducer;

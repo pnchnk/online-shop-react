@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteFromCart } from "../../store/slice/basketSlice";
+import { deleteFromCart, buttonPlus, buttonMinus } from "../../store/slice/basketSlice";
 import "../shoppingCartCard/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 function Card({ images, title, price, quantity, discountPercentage, id, product }) {
-    const basket = useSelector(state=> state.basket.basketItems)
+    const [inputValue, setInputValue] = useState(quantity);
 
     const dispatch = useDispatch();
 
@@ -15,6 +16,18 @@ function Card({ images, title, price, quantity, discountPercentage, id, product 
         //add to basket
         dispatch(deleteFromCart(product));
     };
+
+    const addOne = () => {
+        dispatch(buttonPlus(product));      
+    };
+
+    const minusOne = () => {
+        dispatch(buttonMinus(product));     
+    }
+
+    const inputQuantity = (e) => {
+        setInputValue(e.target.value)
+    }
 
     let currentPrice = Math.round(price - (price * discountPercentage) / 100);
     return (
@@ -33,17 +46,20 @@ function Card({ images, title, price, quantity, discountPercentage, id, product 
                     </div>
                     <div className="product-quantity gy-2">
                         <div className="cart__qty">
-                            <span role="button">-</span>
+                            <span role="button"
+                                onClick={minusOne}>-{'  '}</span>
                             <input
                                 className="product-quantity-input"
                                 value={quantity}
-                                onChange={quantity}
+                                
+                                // maxLength={product.stock}
                             ></input>
                             <span
-                                className="add-product-btn-${id}"
+                                className="add-product-btn"
                                 role="button"
+                                onClick={addOne}
                             >
-                                +
+                             {'  '}   +
                             </span>
                         </div>
                     </div>

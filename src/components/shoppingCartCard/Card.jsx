@@ -1,15 +1,28 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteFromCart, buttonPlus, buttonMinus, inputOnChange } from "../../store/slice/basketSlice";
+import {
+    deleteFromCart,
+    buttonPlus,
+    buttonMinus,
+    inputOnChange,
+} from "../../store/slice/basketSlice";
 import "../shoppingCartCard/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
 
-function Card({ images, title, price, quantity, discountPercentage, id, product }) {
+function Card({
+    images,
+    title,
+    price,
+    quantity,
+    discountPercentage,
+    id,
+    product,
+}) {
     const [inputValue, setInputValue] = useState(quantity);
-    const input = useRef('')
+    const input = useRef("");
     const dispatch = useDispatch();
 
     const handleDelete = () => {
@@ -18,22 +31,21 @@ function Card({ images, title, price, quantity, discountPercentage, id, product 
     };
 
     const addOne = () => {
-        dispatch(buttonPlus(product));  
-        window.location.reload(true)     
+        dispatch(buttonPlus(product));
+        window.location.reload(true);
     };
 
     const minusOne = () => {
-        dispatch(buttonMinus(product));    
-        window.location.reload(true) 
+        dispatch(buttonMinus(product));
+        window.location.reload(true);
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(inputOnChange({value: inputValue, product: product}))
-    }
+        e.preventDefault();
+        dispatch(inputOnChange({ value: inputValue, product: product }));
+    };
 
-    console.log(inputValue)
-
+    console.log(inputValue);
 
     let currentPrice = Math.round(price - (price * discountPercentage) / 100);
     return (
@@ -46,37 +58,48 @@ function Card({ images, title, price, quantity, discountPercentage, id, product 
                     <h6 className="product-name">{title}</h6>
                     <div>
                         <span className="text-decoration-line-through price">
-                            {price}$
+                            {price * quantity}$
                         </span>{" "}
-                        <span className="current-price">{currentPrice}$</span>
+                        <span className="current-price">
+                            {currentPrice * quantity}$
+                        </span>
                     </div>
                     <div className="product-quantity gy-2">
                         <div className="cart__qty">
-                            <span role="button"
-                                onClick={minusOne}>-{'  '}</span>
+                            <span
+                                className="product-quantity__minus"
+                                role="button"
+                                onClick={minusOne}
+                            >
+                                <FontAwesomeIcon icon={faMinus} />
+                            </span>
                             <form onSubmit={handleSubmit}>
-                            <input
-                                className="product-quantity-input"
-                                value={inputValue}
-                                ref={input}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                
-                                // maxLength={product.stock}
-                            />
+                                <input
+                                    className="product-quantity-input"
+                                    value={inputValue}
+                                    ref={input}
+                                    onChange={(e) =>
+                                        setInputValue(e.target.value)
+                                    }
+
+                                    // maxLength={product.stock}
+                                />
                             </form>
                             <span
-                                className="add-product-btn"
+                                className="product-quantity__plus"
                                 role="button"
                                 onClick={addOne}
                             >
-                             {'  '}   +
+                                <FontAwesomeIcon icon={faPlus} />
                             </span>
                         </div>
                     </div>
                 </div>
-                <button className="col-1 cart-item__btn-delete" onClick={handleDelete}>
-                    <FontAwesomeIcon icon={faTrash} className='cart-item__delete'/>
-                </button>
+                <FontAwesomeIcon
+                    onClick={handleDelete}
+                    icon={faTrash}
+                    className="cart-item__delete"
+                />
             </div>
         </div>
     );

@@ -6,7 +6,12 @@ import Card from "../components/shoppingCartCard/Card";
 import Footer from "../components/footer/Footer";
 
 function Cart() {
-    const basket = useSelector(state=> state.basket.basketItems)
+    const basket = useSelector(state=> state.basket.basketItems);
+
+    let totalQuantity = basket?.reduce((acc, item)=> acc += item.quantity, 0);
+    let currentPrice = basket?.reduce((acc, item)=> acc + item.price, 0);
+
+    
 
     const navigate = useNavigate()
        
@@ -34,7 +39,9 @@ function Cart() {
                             />
                         );
                     })}
-                   
+                  <div>
+                    Total price:
+                  </div>
                 </div>
             </section>
             <Footer />

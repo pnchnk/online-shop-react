@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 
-function Card({ thumbnail, price, title, id, product }) {
+function Card({ thumbnail, price, title, id, product, stock }) {
     // const {cart, addToCart} = useContext(MyContext);
 
     const dispatch = useDispatch();
@@ -15,6 +15,14 @@ function Card({ thumbnail, price, title, id, product }) {
         //add to basket
         dispatch(addToCart(product));
     };
+
+    const getStock = (product) => {
+        if(product.stock > 5) {
+            return (
+                <span>In stock</span>
+            )
+        }
+    }
 
     const getRating = (product) => {
         if (product.rating > 4 && product.rating < 4.5) {
@@ -81,10 +89,11 @@ function Card({ thumbnail, price, title, id, product }) {
                 />
                 <div className="card-body p-4" onClick={handleNavigate}>
                     <div className="text-center">
-                        <h5 className="fw-bolder"></h5>
-                        {title}
-                        <div className="d-flex justify-content-center small text-warning mb-2">
-                            {getRating(product)}
+                        <h5 className="card__title">{title}</h5>
+                        <div className="d-flex justify-content-between small mb-2">
+                            <div className="card__stock">{getStock(product)}</div>
+                            <div className="text-warning">{getRating(product)}</div>
+                    
                         </div>
                         <span className="text-decoration-line-through old-price">
                             {price}$

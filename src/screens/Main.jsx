@@ -26,7 +26,7 @@ function Main() {
           {
                products?.map(item => {
                   return(
-                    <Card id={item.id} key={item.id} thumbnail={item.thumbnail} price={item.price} title={item.title} product={item}/>
+                    <Card id={item.id} key={item.id} thumbnail={item.thumbnail} price={item.price} title={item.title} product={item} stock={item.stock}/>
                   )              
                })
             }

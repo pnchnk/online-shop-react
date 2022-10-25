@@ -1,23 +1,28 @@
 import React from 'react'
 import { useEffect, useState, useContext } from 'react';
+import { useSelector } from "react-redux";
 import Header from '../components/header/Header';
 import MyContext from '../context/MyContext';
 import Card from '../components/card/Card';
 import Footer from '../components/footer/Footer';
 
 function Smartphones() {
-    const {products, getProducts} = useContext(MyContext);
+    //const {products, getProducts} = useContext(MyContext);
 
-    const [smartphones, setSmartphones] = useState();
+    const products = useSelector(state=> state.products.products);
+
+    const smartphones = [];
 
     const filterSmartphones = () => {
        let temp = products?.filter(el => el.category === 'smartphones');
-       setSmartphones(temp);
+       smartphones?.push([...temp])
+       //setSmartphones(temp);
     }
 
     useEffect(()=> {
-        getProducts();
+        // getProducts();
         filterSmartphones();
+        console.log(smartphones)
       },[])
 
   return (

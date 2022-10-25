@@ -4,13 +4,19 @@ import { useSelector } from "react-redux";
 import Header from '../components/header/Header'
 import Card from '../components/card/Card';
 import MyContext from '../context/MyContext';
+import { useGetAllProductsQuery } from '../store/api/products';
 import Footer from '../components/footer/Footer';
 
 function Main() {
-  const {products, getProducts} = useContext(MyContext);
+
+  const products = useSelector(state=> state.products.products);
+
+  const {data, error, loading} = useGetAllProductsQuery();
+
+  //const {products, getProducts} = useContext(MyContext);
 
   useEffect(()=> {
-    getProducts();
+    //getProducts();
   },[])
 
 

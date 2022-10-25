@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import {productsApi} from './api/products'
 import { 
   persistStore, 
   persistReducer,  
@@ -9,11 +10,15 @@ import {
   PURGE,
   REGISTER, 
 } from 'redux-persist'
+import productsReducer from './slice/products'
 import localStorage from 'redux-persist/lib/storage' 
 import basketReducer from './slice/basketSlice'
 
 const rootReducer = combineReducers({
   basket: basketReducer,
+  products: productsReducer,
+  [productsApi.reducerPath]: productsApi.reducer
+,
 });
 
 const persistConfig = {
@@ -25,12 +30,21 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
   reducer: persistedReducer,
+  //  products: productsReducer,
+  //   [productsApi.reducerPath]: productsApi.reducer
+  // ,
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }),
+  }).concat(productsApi.middleware),
+  
+  // reducer: {
+  //   products: productsReducer,
+  //   [productsApi.reducerPath]: productsApi.reducer
+  // },
+  //middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(productsApi.middleware)
 })
 
 export const persistor = persistStore(store)

@@ -13,7 +13,6 @@ function Navigation() {
 
     const handleNavigate = () => {
         navigate(`/cart`);
-        // window.location.reload();
     };
 
     return (

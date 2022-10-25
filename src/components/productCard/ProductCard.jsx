@@ -1,9 +1,13 @@
 import React from "react";
+import { useState, useRef } from "react";
 import "../productCard/product-card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf, faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/slice/basketSlice";
+import {
+    inputOnChange, productPageAdd
+} from "../../store/slice/basketSlice";
+
 function ProductCard({
     thumbnail,
     price,
@@ -14,10 +18,16 @@ function ProductCard({
     product,
 }) {
     const dispatch = useDispatch();
+    const [inputValue, setInputValue] = useState(1);
+    const input = useRef();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(productPageAdd({ value: inputValue, product: product }));
+    };
 
     const handleClick = () => {
-        //add to basket
-        dispatch(addToCart(product));
+        dispatch(productPageAdd({ value: inputValue, product: product }));
     };
 
     const currentPrice = () =>{
@@ -71,13 +81,19 @@ function ProductCard({
                 </div>
                 <p className="lead">{description}</p>
                 <div className="d-flex">
-                    <input
-                        className="form-control text-center me-3"
-                        id="inputQuantity"
-                        type="num"
-                        value="1"
-                        style={{ maxWidth: "3rem" }}
-                    />
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            className="form-control text-center me-3"
+                            id="inputQuantity"
+                            type="num"
+                            ref={input}
+                            value={inputValue}
+                            onChange={(e) =>
+                                setInputValue(e.target.value)
+                            }
+                            style={{ maxWidth: "3rem" }}
+                        />
+                    </form>
                     <button
                         className="add-basket btn btn-outline-dark flex-shrink-0"
                         type="button"

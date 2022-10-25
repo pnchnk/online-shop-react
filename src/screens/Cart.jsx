@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
 import Card from "../components/shoppingCartCard/Card";
 import Footer from "../components/footer/Footer";
@@ -8,8 +8,8 @@ import Footer from "../components/footer/Footer";
 function Cart() {
     const basket = useSelector(state=> state.basket.basketItems);
 
-    let totalQuantity = basket?.reduce((acc, item)=> acc += item.quantity, 0);
-    let currentPrice = basket?.reduce((acc, item)=> acc + item.price, 0);
+    //let totalQuantity = basket?.reduce((acc, item)=> acc += item.quantity, 0);
+    //let currentPrice = basket?.reduce((acc, item)=> acc + item.price, 0);
 
     
 
@@ -40,7 +40,7 @@ function Cart() {
                         );
                     })}
                   <div>
-                    Total price:
+                    {/* Total price: */}
                   </div>
                 </div>
             </section>

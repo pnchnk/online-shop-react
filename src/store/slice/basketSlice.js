@@ -8,34 +8,24 @@ const basketSlice = createSlice({
   reducers: {
     addToCart: (state, { payload }) => {
       let isInArray = false;
-      let quantity = 1;
-      let productID = `product${payload.id}`;
 
-      // if product already exists in array
+      // if the product is already exist in array
       state.basketItems?.forEach((el) => {
         if (el.id === payload.id) {
           isInArray = true;
           el.quantity++
-        //   localStorage.setItem(
-        //     productID,
-        //     +localStorage.getItem(productID) + +quantity
-        //   );
-            
         }
       });
-
       if (!isInArray) {
         state.basketItems.push({ ...payload, quantity: 1 });
-        // localStorage.setItem(
-        //   productID,
-        //   +localStorage.getItem(productID) + +quantity
-        // );
       }
     },
+
     deleteFromCart: (state, { payload }) => {
       const {id} = payload;
       state.basketItems = state.basketItems.filter(item => item.id !== id);
     },
+
     buttonPlus: (state, { payload }) => {
       state.basketItems?.forEach((el) => {
         if (el.id === payload.id) {
@@ -43,6 +33,7 @@ const basketSlice = createSlice({
         }
       });
     },
+
     buttonMinus: (state, { payload }) => {
       state.basketItems?.forEach((el) => {
         if (el.id === payload.id) {
@@ -53,6 +44,8 @@ const basketSlice = createSlice({
         }
       });
     },
+
+    //input change from Cart page
     inputOnChange: (state, { payload }) => {
       const id = payload.product.id
       const value  = Number(payload.value)
@@ -62,8 +55,24 @@ const basketSlice = createSlice({
         }
       });
     },
+
+    // add to cart from Product page
+    productPageAdd:(state, { payload }) => {
+      const id = payload.product.id
+      const value  = Number(payload.value)
+      let isInArray = false;
+      state.basketItems?.forEach((el) => {
+        if (el.id === payload.product.id) {
+          isInArray = true;
+          el.quantity = el.quantity + value
+        }
+      });
+      if (!isInArray) {
+        state.basketItems.push({ ...payload.product, quantity: value });
+      }
+    },
   },
 });
 
-export const { addToCart, deleteFromCart, buttonPlus, buttonMinus, inputOnChange } = basketSlice.actions;
+export const { addToCart, deleteFromCart, buttonPlus, buttonMinus, inputOnChange, productPageAdd } = basketSlice.actions;
 export default basketSlice.reducer;

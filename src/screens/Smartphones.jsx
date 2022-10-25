@@ -1,47 +1,48 @@
-import React from 'react'
-import { useEffect, useState, useContext } from 'react';
+import React from "react";
+import { useEffect, useState, useContext } from "react";
 import { useSelector } from "react-redux";
-import Header from '../components/header/Header';
-import MyContext from '../context/MyContext';
-import Card from '../components/card/Card';
-import Footer from '../components/footer/Footer';
+import Header from "../components/header/Header";
+import MyContext from "../context/MyContext";
+import Card from "../components/card/Card";
+import Footer from "../components/footer/Footer";
 
 function Smartphones() {
-    //const {products, getProducts} = useContext(MyContext);
+  const [smartphones, setSmartphones] = useState([]);
 
-    const products = useSelector(state=> state.products.products);
+  const products = useSelector((state) => state.products.products);
 
-    const smartphones = [];
+  const filterSmartphones = () => {
+    let temp = products?.filter((el) => el.category === "smartphones");
+    setSmartphones([...smartphones, ...temp]);
+  };
 
-    const filterSmartphones = () => {
-       let temp = products?.filter(el => el.category === 'smartphones');
-       smartphones?.push([...temp])
-       //setSmartphones(temp);
-    }
-
-    useEffect(()=> {
-        // getProducts();
-        filterSmartphones();
-        console.log(smartphones)
-      },[])
+  useEffect(() => {
+    // getProducts();
+    filterSmartphones();
+  }, []);
 
   return (
     <>
-        <Header title={"Smartphones"}/>
-          <div className="container px-4 px-lg-5 mt-5">
-            <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {
-                smartphones?.map(item => {
-                    return(
-                      <Card id={item.id} key={`smartphone${item.id}`} thumbnail={item.thumbnail} price={item.price} title={item.title} product={item}/>
-                    )              
-                })
-              }
-            </div>
-          </div>
-        <Footer/>
+      <Header title={"Smartphones"} />
+      <div className="container px-4 px-lg-5 mt-5">
+        <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          {smartphones?.map((item) => {
+            return (
+              <Card
+                id={item.id}
+                key={`smartphone${item.id}`}
+                thumbnail={item.thumbnail}
+                price={item.price}
+                title={item.title}
+                product={item}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default Smartphones
+export default Smartphones;

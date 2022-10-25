@@ -1,8 +1,7 @@
 import React from "react";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/header/Header";
-import MyContext from "../context/MyContext";
 import Card from "../components/card/Card";
 import Footer from "../components/footer/Footer";
 

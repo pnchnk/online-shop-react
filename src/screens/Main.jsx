@@ -1,9 +1,7 @@
-import React, {useContext, useEffect} from 'react'
-import { Link } from "react-router-dom";
+import React, {useEffect} from 'react'
 import { useSelector } from "react-redux";
 import Header from '../components/header/Header'
 import Card from '../components/card/Card';
-import MyContext from '../context/MyContext';
 import { useGetAllProductsQuery } from '../store/api/products';
 import Footer from '../components/footer/Footer';
 

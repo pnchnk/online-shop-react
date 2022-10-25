@@ -1,8 +1,6 @@
 import React from "react";
-import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/slice/basketSlice";
-import MyContext from "../../context/MyContext";
 import "./card.css";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

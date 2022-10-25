@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf, faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import {
-    inputOnChange, productPageAdd
+    productPageAdd
 } from "../../store/slice/basketSlice";
 
 function ProductCard({

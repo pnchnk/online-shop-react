@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState, useContext } from "react";
+import { useGetAllProductsQuery } from '../store/api/products';
 import { useSelector } from "react-redux";
 import Header from "../components/header/Header";
 import Card from "../components/card/Card";
@@ -7,6 +8,8 @@ import Footer from "../components/footer/Footer";
 
 function Laptops() {
   const products = useSelector((state) => state.products.products);
+
+  const {data, error, loading} = useGetAllProductsQuery();
 
   const [laptops, setLaptops] = useState([]);
 

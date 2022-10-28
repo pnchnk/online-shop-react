@@ -1,59 +1,80 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useGetAllProductsQuery } from '../store/api/products';
+import { useGetAllProductsQuery } from "../store/api/products";
 import Header from "../components/header/Header";
 import Card from "../components/card/Card";
 import Footer from "../components/footer/Footer";
 
 function Smartphones() {
-  const [smartphones, setSmartphones] = useState([]);
-  const [sort, setSort] = useState("relevance");
+    const [sort, setSort] = useState("relevance");
 
-  const products = useSelector((state) => state.products.products);
+    const products = useSelector((state) => state.products.products);
 
-  const {data, error, loading} = useGetAllProductsQuery();
+    useGetAllProductsQuery();
 
-  const filterSmartphones = () => {
-    let temp = products?.filter((el) => el.category === "smartphones");
-    setSmartphones([...smartphones, ...temp]);
-  };
+    const mainProducts = Array.from(products).filter(
+        (el) => el.category === "smartphones"
+    );
 
-  const smartPhoneProducts = Array.from(smartphones);
+    const onSelect = (e) => {
+        setSort(e.target.value);
+    };
 
-  const onSelect = (e) => {
-    setSort(e.target.value);
-};
-
-
-
-  useEffect(() => {
-    // getProducts();
-    filterSmartphones();
-  }, []);
-
-  return (
-    <>
-      <Header title={"Smartphones"} />
-      <div className="container px-4 px-lg-5 mt-5">
-        <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-          {smartphones?.map((item) => {
-            return (
-              <Card
-                id={item.id}
-                key={`smartphone${item.id}`}
-                thumbnail={item.thumbnail}
-                price={item.price}
-                title={item.title}
-                product={item}
-              />
+    const sorted = useMemo(() => {
+        if (sort === "relevance") {
+            return mainProducts.sort((a, b) => b.rating - a.rating);
+        } else if (sort === "low-high") {
+            return mainProducts.sort(
+                (a, b) =>
+                    Math.round(
+                        a.price - (a.price * a.discountPercentage) / 100
+                    ) -
+                    Math.round(b.price - (b.price * b.discountPercentage) / 100)
             );
-          })}
-        </div>
-      </div>
-      <Footer />
-    </>
-  );
+        } else if (sort === "high-low") {
+            return mainProducts.sort(
+                (a, b) =>
+                    Math.round(
+                        b.price - (b.price * b.discountPercentage) / 100
+                    ) -
+                    Math.round(a.price - (a.price * a.discountPercentage) / 100)
+            );
+        }
+    }, [sort]);
+
+    return (
+        <>
+            <Header title={"Smartphones"} />
+            <div className="container px-4 px-lg-5 mt-5">
+                <div className="products__sort">
+                    Sort by :{" "}
+                    <select value={sort} onChange={onSelect}>
+                        <option selected value={"relevance"}>
+                            Relevance
+                        </option>
+                        <option value={"low-high"}>Price: low to high</option>
+                        <option value={"high-low"}>Price: high to low</option>
+                    </select>
+                </div>
+                <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {sorted?.map((item) => {
+                        return (
+                            <Card
+                                id={item?.id}
+                                key={`smartphone${item?.id}`}
+                                thumbnail={item?.thumbnail}
+                                price={item?.price}
+                                title={item?.title}
+                                product={item}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
+            <Footer />
+        </>
+    );
 }
 
 export default Smartphones;

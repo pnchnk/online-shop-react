@@ -9,7 +9,7 @@ function Main() {
 
   const products = useSelector(state=> state.products.products);
 
-  const {data, error, loading} = useGetAllProductsQuery();
+  useGetAllProductsQuery();
 
   const mainProducts = Array.from(products);
 
@@ -40,21 +40,14 @@ const sorted = useMemo(() => {
         );
     }
 }, [sort]);
-  //const {products, getProducts} = useContext(MyContext);
-
-  useEffect(()=> {
-    //getProducts();
-  },[])
-
-
 
   return (
     <>
         <Header title={"Nikita Shop"}/>
         <div className="container px-4 px-lg-5 mt-5">
-        <div className="products__sort">
+        <div className="products__sort mb-3">
                 Sort by :{" "}
-                <select value={sort} onChange={onSelect}>
+                <select value={sort} onChange={onSelect} aria-label="Default select example">
                     <option selected value={"relevance"}>
                         Relevance
                     </option>

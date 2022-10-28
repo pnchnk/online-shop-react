@@ -12,3 +12,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.products__sort {
+  display: flex;
+  justify-content: end;
+}
+
+select, select:focus, select:focus-visible {
+  border: none !important;
+  outline: none !important;
+  padding-left: 5px;
+}
+
+option:active {
+  background-color: lightgray;
+}

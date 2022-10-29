@@ -21,21 +21,22 @@ function Card({
     product,
 }) {
     const [inputValue, setInputValue] = useState(quantity);
-    const input = useRef("");
+    const input = useRef('');
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        //add to basket
         dispatch(deleteFromCart(product));
     };
 
     const addOne = () => {
         dispatch(buttonPlus(product));
+        // setInputValue(+inputValue + 1);
         window.location.reload(true);
     };
 
     const minusOne = () => {
         dispatch(buttonMinus(product));
+        // setInputValue(+inputValue - 1);
         window.location.reload(true);
     };
 
@@ -44,14 +45,12 @@ function Card({
         dispatch(inputOnChange({ value: inputValue, product: product }));
     };
 
-    console.log(inputValue);
-
     let currentPrice = Math.round(price - (price * discountPercentage) / 100);
     return (
         <div className="cart">
             <div className="cart__item">
                 <div className="col-5 text-center">
-                    <img className="card-img" src={images[0]} alt={title} />
+                    <img className="cart-item__img" src={images[0]} alt={title} />
                 </div>
                 <div className="col-6 mt-2 overflow-visible">
                     <h6 className="product-name">{title}</h6>
@@ -59,33 +58,34 @@ function Card({
                         <span className="text-decoration-line-through price">
                             {price * quantity}$
                         </span>{" "}
-                        <span className="current-price">
+                        <span className="cart-item__current-price">
                             {currentPrice * quantity}$
                         </span>
                     </div>
-                    <div className="product-quantity gy-2">
+                    <div className="cart-item__quantity gy-2">
                         <div className="cart__qty">
                             <span
-                                className="product-quantity__minus"
+                                className="quantity-minus"
                                 role="button"
                                 onClick={minusOne}
                             >
                                 <FontAwesomeIcon icon={faMinus} />
                             </span>
                             <form onSubmit={handleSubmit}>
+                                {!quantity ? null : 
                                 <input
                                     className="product-quantity-input"
                                     value={inputValue}
+                                    key={`product-input${id}`}
                                     ref={input}
                                     onChange={(e) =>
                                         setInputValue(e.target.value)
                                     }
-
-                                    // maxLength={product.stock}
                                 />
+                                }
                             </form>
                             <span
-                                className="product-quantity__plus"
+                                className="quantity-plus"
                                 role="button"
                                 onClick={addOne}
                             >

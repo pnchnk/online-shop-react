@@ -16,7 +16,7 @@ code {
 
 .products__sort {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 select, select:focus, select:focus-visible {
@@ -35,7 +35,7 @@ option:active {
 
 .modal-window {
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.4);
   min-height: 100vh;
   min-width: 100vw;
   top: 0;
@@ -45,11 +45,43 @@ option:active {
 
 .modal-cart {
   top: 10px;
-  right: 5px;
+  right: 20px;
   height: 300px;
   width: 300px;
   position: fixed;
   background-color: white;
   z-index: 101;
   overflow: scroll;
+  border-radius: 10px;
+}
+
+.modal-cart__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 35px;
+  user-select: none;
+}
+
+.modal-card-img {
+  height: 70px;
+  width: 100%;
+  background-size: contain;
+}
+
+.modal-cart__product-name {
+  margin-bottom: 0;
+}
+
+.cart-actions {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+.cart__total-price {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: 700;
 }

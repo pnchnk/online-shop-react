@@ -22,8 +22,9 @@ const basketSlice = createSlice({
     },
 
     deleteFromCart: (state, { payload }) => {
-      const {id} = payload;
-      state.basketItems = state.basketItems.filter(item => item.id !== id);
+      const id = payload.id;
+      state.basketItems = state?.basketItems?.filter(item => item.id !== id);
+      //console.log(payload)
     },
 
     buttonPlus: (state, { payload }) => {
@@ -58,7 +59,7 @@ const basketSlice = createSlice({
 
     // add to cart from Product page
     productPageAdd:(state, { payload }) => {
-      const id = payload.product.id
+      //const id = payload.product.id
       const value  = Number(payload.value)
       let isInArray = false;
       state.basketItems?.forEach((el) => {

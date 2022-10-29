@@ -1,21 +1,10 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteFromCart,
-  buttonPlus,
-  buttonMinus,
-  inputOnChange,
-} from "../../store/slice/basketSlice";
+import { useSelector } from "react-redux";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartShopping,
-  faTrash,
-  faMinus,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 function Navigation() {
   const [modalWindow, setModalWindow] = useState(false);
@@ -31,57 +20,35 @@ function Navigation() {
     navigate(`/cart`);
   };
 
-  // const [inputValue, setInputValue] = useState();
-  // const input = useRef("");
-  // const dispatch = useDispatch();
-
-  // const handleDelete = () => {
-  //   //add to basket
-  //   dispatch(deleteFromCart(product));
-  // };
-
-  // const addOne = (item) => {
-  //   dispatch(buttonPlus(item));
-  //   window.location.reload(true);
-  // };
-
-  // const minusOne = (item) => {
-  //   dispatch(buttonMinus(item));
-  //   window.location.reload(true);
-  // };
-
-  // const handleSubmit = (e, item) => {
-  //   e.preventDefault();
-  //   dispatch(inputOnChange({ value: inputValue, product: item }));
-  // };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       {!modalWindow ? null : (
         <>
-          <div className="modal-window" onClick={() => setModalWindow(false)}></div>
+          <div
+            className="modal-window"
+            onClick={() => setModalWindow(false)}
+          ></div>
           <div className="modal-cart">
-            <h3>Card</h3>
-            {!basket.length && <div className="empty-cart">Your cart is empty. Go to <span style={{fontWeight:"bold", cursor:"pointer"}}>Main Page{" "}</span>to continue shopping.</div>}
+            <h3 className="text-center mt-2 mb-3">Your products:</h3>
+            {!basket.length && (
+              <div className="empty-cart">Cart is empty.</div>
+            )}
             {basket.map((item) => {
-              return (
-                <Modal item={item} quantity={item?.quantity}/>
-              );
+              return <Modal item={item} quantity={item?.quantity} key={`modal-product${item.id}`}/>;
             })}
-             <button
+            {!basket.length ? null : (
+              <button
                 id="crt-btn"
-                className="btn btn-outline-dark"
+                className="btn btn-outline-dark text-center"
                 type="button"
                 onClick={handleNavigate}
                 disabled={!basket.length}
+                style={{marginLeft: "20px", marginBottom:"10px"}}
               >
-                Cart <FontAwesomeIcon icon={faCartShopping} />
-                <span className="js-amount badge bg-dark text-white ms-1 rounded-pill">
-                  {totalQuantity}
-                </span>
+                Go to cart <FontAwesomeIcon icon={faCartShopping} />
               </button>
-            <div className="dropdown-button position-relative">
-          </div>
+            )}
+            <div className="dropdown-button position-relative"></div>
           </div>
         </>
       )}

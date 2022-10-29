@@ -95,13 +95,13 @@ function Card({ thumbnail, price, title, id, product, stock }) {
                             <div className="text-warning">{getRating(product)}</div>
                     
                         </div>
-                        <span className="text-decoration-line-through old-price">
+                        <span className="text-decoration-line-through card__old-price">
                             {price}$
                         </span>{" "}
-                        <span className="current-price">{currentPrice}$</span>
+                        <span className="card__current-price">{currentPrice}$</span>
                     </div>
                 </div>
-                <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div className="card__footer p-4 pt-0 border-top-0 bg-transparent">
                     <div className="text-center card__btn">
                         <button
                             type="button"

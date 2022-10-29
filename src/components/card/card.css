@@ -40,13 +40,14 @@
     max-height: 100% !important;
 }
     
-.old-price {
+.card__old-price {
     font-size: 14px;
     color: lightgray;
 }
     
-.current-price {
+.card__current-price {
     font-weight: 700;
+    margin-left: 10px;
 }
     
 .card__btn {

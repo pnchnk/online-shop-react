@@ -42,7 +42,7 @@ function Card({
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(inputOnChange({ value: inputValue, product: product }));
+        dispatch(inputOnChange({ value: inputValue, product }));
     };
 
     let currentPrice = Math.round(price - (price * discountPercentage) / 100);

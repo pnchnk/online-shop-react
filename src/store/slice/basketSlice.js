@@ -72,8 +72,12 @@ const basketSlice = createSlice({
         state.basketItems.push({ ...payload.product, quantity: value });
       }
     },
+    cleanCart:(state) => {
+      let emptyArr = []
+      state.basketItems = emptyArr;
+    },
   },
 });
 
-export const { addToCart, deleteFromCart, buttonPlus, buttonMinus, inputOnChange, productPageAdd } = basketSlice.actions;
+export const { addToCart, deleteFromCart, buttonPlus, buttonMinus, inputOnChange, productPageAdd, cleanCart } = basketSlice.actions;
 export default basketSlice.reducer;

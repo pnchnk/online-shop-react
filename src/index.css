@@ -19,7 +19,9 @@ code {
   justify-content: flex-end;
 }
 
-select, select:focus, select:focus-visible {
+select,
+select:focus,
+select:focus-visible {
   border: none !important;
   outline: none !important;
   padding-left: 5px;
@@ -81,7 +83,9 @@ option:active {
 }
 
 .cart__total-price {
-  display: inline-block;
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
   margin-right: 10px;
   font-weight: 700;
 }

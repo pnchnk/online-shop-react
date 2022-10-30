@@ -1,12 +1,18 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  cleanCart
+} from "../store/slice/basketSlice";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
 import Card from "../components/shoppingCartCard/Card";
 import Footer from "../components/footer/Footer";
+import Modal from "../components/modalSuccessfull/Modal";
 
 function Cart() {
   const basket = useSelector((state) => state.basket.basketItems);
+
+  const [modalWindow, setModalWindow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -14,12 +20,19 @@ function Cart() {
     navigate(`/`);
   };
 
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    setModalWindow(false);
+    dispatch(cleanCart())
+  }
+
   return (
     <>
       <Header title={"Shopping cart"} />
-      <section className="section-js hidden py-5 bg-light">
+      <section className="section-js hidden py-5 bg-light position-relative">
         <div
-          className="container px-4 px-lg-5 mt-5"
+          className="container px-4 px-lg-5 mt-1"
           style={{ minHeight: "41vh" }}
         >
           {!basket.length && (
@@ -65,12 +78,17 @@ function Cart() {
                   )
               }$
               </span>
-              <button type="submit">
-                    Buy
+              <button className="btn btn-outline-dark text-center" type="button" onClick={() => setModalWindow(true)}>
+                    Place order.
               </button>
               </>
             )}
           </div>
+          {
+            !modalWindow ? null : (
+              <Modal closeModal={handleClose}/>
+            )
+          }
         </div>
       </section>
       <Footer />

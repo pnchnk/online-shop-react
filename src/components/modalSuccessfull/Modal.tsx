@@ -1,7 +1,14 @@
 import React from "react";
 import "../modalSuccessfull/modal.css";
 
-function Modal({closeModal}) {
+type Props = {
+  closeModal : any
+}
+
+function Modal(props: Props) {
+  const {
+    closeModal,
+  } = props;
   return (
     <>
       <div className="successfull-order" onClick={closeModal}></div>

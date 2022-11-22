@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { useAppSelector } from "../../store/hooks";
+
 
 function Navigation() {
-  const [modalWindow, setModalWindow] = useState(false);
-  const basket = useSelector((state) => state.basket?.basketItems);
-  const totalQuantity = basket?.reduce(
+  const [modalWindow, setModalWindow] = useState<boolean>(false);
+  
+  const basket = useAppSelector((state) => state.basket?.basketItems);
+
+  const totalQuantity: number = basket?.reduce(
     (acc, item) => (acc += item.quantity),
     0
   );
@@ -34,7 +37,7 @@ function Navigation() {
               <div className="empty-cart">Cart is empty.</div>
             )}
             {basket.map((item) => {
-              return <Modal item={item} quantity={item?.quantity} key={`modal-product${item.id}`}/>;
+              return <Modal item={item} quantity={item.quantity} key={`modal-product${item.id}`}/>;
             })}
             {!basket.length ? null : (
               <button
@@ -78,7 +81,7 @@ function Navigation() {
               <Link
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown"
-                href=""
+                to=""
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"

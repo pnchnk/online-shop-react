@@ -1,22 +1,37 @@
-import React from "react";
-import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/slice/basketSlice";
 import "./card.css";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
+import { useAppDispatch } from "../../store/hooks";
+import { Products } from "../../types";
 
-function Card({ thumbnail, price, title, id, product, stock }) {
+type Props = {
+ thumbnail: string,
+ price: number,
+ title: string,
+ id: number,
+ product: any
+}
+
+function Card(props: Props) {
+    const {
+        thumbnail,
+        price,
+        title,
+        id,
+        product
+    } = props;
     // const {cart, addToCart} = useContext(MyContext);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleClick = () => {
         //add to basket
         dispatch(addToCart(product));
     };
 
-    const getStock = (product) => {
+    const getStock = (product: Products) => {
         if(product.stock > 5) {
             return (
                 <span>In stock</span>
@@ -24,7 +39,7 @@ function Card({ thumbnail, price, title, id, product, stock }) {
         }
     }
 
-    const getRating = (product) => {
+    const getRating = (product: Products) => {
         if (product.rating > 4 && product.rating < 4.5) {
             return (
                 <>

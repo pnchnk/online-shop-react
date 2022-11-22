@@ -1,37 +1,43 @@
 import React, { useEffect, useState } from "react";
+
+//route
 import { useParams } from "react-router-dom";
-import { useGetProductQuery } from '../store/api/products';
-import { useSelector } from "react-redux";
+
+//components
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Header from "../components/header/Header";
 import ProductCard from "../components/productCard/ProductCard";
 import Footer from "../components/footer/Footer";
 import Card from "../components/card/Card";
+import Spinner from '../components/spinner/Index';
+
+//store
+import { useGetProductQuery } from '../store/api/products';
+import { useAppSelector } from "../store/hooks";
 
 function Product() {
     const params = useParams();
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
-    const products = useSelector((state) => state.products.products);
+    const products = useAppSelector((state) => state.products.products);
 
-    const { data, error, isLoading } = useGetProductQuery(params?.id)
+    const { data } = useGetProductQuery(params?.id)
 
-   
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if(data){
+                return (
+                    setIsLoading(false)
+                )
+            }
+        }, 400);
+        return () => clearTimeout(timer);
+      }, []);
 
-    //const [product, setProduct] = useState();
+    const [relevant, setRelevant] = useState<any>();
 
-    const [relevant, setRelevant] = useState();
-
-    console.log(relevant)
-
-    // const getAProduct = (id) => {
-    //     fetch(`https://dummyjson.com/products/${id}`)
-    //         .then((response) => response.json())
-    //         .then((data) => setProduct(data));
-    // };
-
-    const relatedProducts = (product) => {
-        //let tempVar = new Object(product);
+    const relatedProducts = (product: any) => {
         let temp = products?.filter((el) => el.category === product?.category && el?.id !== product?.id);
         if (temp.length > 3 ) {
             temp.pop()
@@ -39,18 +45,13 @@ function Product() {
         }
     };
 
-    // useEffect(() => {
-    //     if (params?.id) {
-    //         getAProduct(params.id);
-    //     }
-    // }, [params]);
-
     useEffect(() => {
         relatedProducts(data);
     }, [data]);
 
     return (
         <>
+            {isLoading ? <Spinner/> : null}
             <Header title={data?.title}/>
             <Container>
                 <Row className="mt-5 product-card ">
@@ -67,7 +68,7 @@ function Product() {
                 </Row>
                 <Row className="mt-5 justify-content-center">
                     <h3 className="text-center">You may also like</h3>
-                    {relevant?.map((item) => {
+                    {relevant?.map((item: any) => {
                         return (
                             <Card
                                 id={item?.id}

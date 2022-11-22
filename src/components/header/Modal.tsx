@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+
 import {
   deleteFromCart,
   buttonPlus,
   buttonMinus,
   inputOnChange,
 } from "../../store/slice/basketSlice";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -13,10 +14,22 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Modal({ item, quantity }) {
-  const [inputValue, setInputValue] = useState(quantity);
-  const input = useRef("");
-  const dispatch = useDispatch();
+import { useAppDispatch } from "../../store/hooks";
+
+type Props = {
+  item: any,
+  quantity: number,
+}
+
+function Modal(props: Props) {
+  const {
+    item,
+    quantity,
+  } = props
+
+  const [inputValue, setInputValue] = useState<any>(quantity);
+  const input = useRef<any>("");
+  const dispatch = useAppDispatch();
 
   const handleDelete = () => {
     dispatch(deleteFromCart(item));
@@ -32,7 +45,7 @@ function Modal({ item, quantity }) {
     setInputValue(inputValue - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(inputOnChange({ value: inputValue, product: item }));
   };
@@ -65,7 +78,7 @@ function Modal({ item, quantity }) {
               className="product-quantity-input"
               value={inputValue}
               ref={input}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
             />
           </form>
           <span

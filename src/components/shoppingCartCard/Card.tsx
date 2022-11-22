@@ -10,19 +10,33 @@ import "../shoppingCartCard/card.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";
+import { useAppDispatch} from "../../store/hooks";
 
-function Card({
-    images,
-    title,
-    price,
-    quantity,
-    discountPercentage,
-    id,
-    product,
-}) {
+type Props = {
+    images: [string],
+    title: string,
+    price: number,
+    quantity: any,
+    discountPercentage: number,
+    id: number,
+    product: any,
+}
+
+function Card(props: Props) {
+
+    const {
+        images,
+        title,
+        price,
+        quantity,
+        discountPercentage,
+        id,
+        product,
+    } = props;
+
     const [inputValue, setInputValue] = useState(quantity);
     const input = useRef('');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleDelete = () => {
         dispatch(deleteFromCart(product));
@@ -31,16 +45,16 @@ function Card({
     const addOne = () => {
         dispatch(buttonPlus(product));
         // setInputValue(+inputValue + 1);
-        window.location.reload(true);
+        window.location.reload();
     };
 
     const minusOne = () => {
         dispatch(buttonMinus(product));
         // setInputValue(+inputValue - 1);
-        window.location.reload(true);
+        window.location.reload();
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(inputOnChange({ value: inputValue, product }));
     };
@@ -77,7 +91,6 @@ function Card({
                                     className="product-quantity-input"
                                     value={inputValue}
                                     key={`product-input${id}`}
-                                    ref={input}
                                     onChange={(e) =>
                                         setInputValue(e.target.value)
                                     }

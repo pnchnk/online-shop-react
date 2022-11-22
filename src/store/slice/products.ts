@@ -1,23 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction  } from "@reduxjs/toolkit";
 import productsApi from "../api/products";
+import { ProductsSlice } from "./type";
 
-const initialState = {
+const initialState: ProductsSlice  = {
     products: [],
 };
 
 export const productsSlice = createSlice({
     name: "products",
     initialState,
+    reducers:{
+
+    },
     extraReducers: (builder) => {
         builder.addMatcher(
             productsApi.endpoints.getAllProducts.matchFulfilled,
-            (state, { payload }) => {
+            (state, { payload }: PayloadAction<any>) => {
                 state.products = payload;             
             }
         );
     },
 });
-
-// export const { addproducts, deletePost, markPost } = productsSlice.actions;
 
 export default productsSlice.reducer;

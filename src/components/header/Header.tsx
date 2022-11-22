@@ -1,8 +1,14 @@
-import React from 'react'
 import Navigation from './Navigation'
 import Title from './Title'
 
-function Header({title}) {
+type Props = {
+  title: string,
+}
+
+function Header(props: Props) {
+  const {
+  title,
+} = props;
   return (
     <>
         <Navigation/>

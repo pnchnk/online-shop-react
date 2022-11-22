@@ -8,20 +8,33 @@ import {
     productPageAdd
 } from "../../store/slice/basketSlice";
 
-function ProductCard({
-    thumbnail,
-    price,
-    title,
-    id,
-    description,
-    rating,
-    product,
-}) {
+type Props = {
+    thumbnail: string,
+    price: number,
+    title: string,
+    id: number,
+    description: string,
+    rating: number,
+    product: any,
+}
+
+function ProductCard(props: Props) {
+
+    const {
+        thumbnail,
+        price,
+        title,
+        id,
+        description,
+        rating,
+        product
+    } = props;
+
     const dispatch = useDispatch();
-    const [inputValue, setInputValue] = useState(1);
+    const [inputValue, setInputValue] = useState<any>(1);
     const input = useRef();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(productPageAdd({ value: inputValue, product: product }));
     };
@@ -35,7 +48,7 @@ function ProductCard({
         Math.round(product?.price - (product?.price * product?.discountPercentage) / 100)
       )
     } 
-    const getRating = (rating) => {
+    const getRating = (rating: number) => {
         if (rating > 4 && rating < 4.5) {
             return (
                 <>
@@ -86,7 +99,7 @@ function ProductCard({
                             className="form-control text-center me-3"
                             id="inputQuantity"
                             type="num"
-                            ref={input}
+                            // ref={input}
                             value={inputValue}
                             onChange={(e) =>
                                 setInputValue(e.target.value)

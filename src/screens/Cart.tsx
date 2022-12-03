@@ -8,7 +8,7 @@ import Footer from "../components/footer/Footer";
 import Modal from "../components/modalSuccessfull/Modal";
 import Spinner from "../components/spinner/Index";
 
-//store
+//store & slices
 import { cleanCart } from "../store/slice/basketSlice";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 

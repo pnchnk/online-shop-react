@@ -1,9 +1,9 @@
-import { Products, BasketItems } from "../../types";
+import { Product, BasketItem } from "../../types";
 
 export interface ProductsSlice {
-    products: Products[];
+    products: Product[];
 }
 
 export interface BasketItemsSlice {
-    basketItems : BasketItems[]
+    basketItems : BasketItem[]
 }

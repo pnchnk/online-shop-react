@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch } from "../../store/hooks";
-import { Products } from "../../types";
+import { Product } from "../../types";
 
 type Props = {
  thumbnail: string,
@@ -31,7 +31,7 @@ function Card(props: Props) {
         dispatch(addToCart(product));
     };
 
-    const getStock = (product: Products) => {
+    const getStock = (product: Product) => {
         if(product.stock > 5) {
             return (
                 <span>In stock</span>
@@ -39,7 +39,7 @@ function Card(props: Props) {
         }
     }
 
-    const getRating = (product: Products) => {
+    const getRating = (product: Product) => {
         if (product.rating > 4 && product.rating < 4.5) {
             return (
                 <>

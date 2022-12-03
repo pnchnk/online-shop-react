@@ -1,4 +1,4 @@
-export interface Products {
+export interface Product {
   id: number,
   title: string,
   description: string,
@@ -13,7 +13,7 @@ export interface Products {
   quantity: number,
 }
 
-export interface BasketItems {
+export interface BasketItem {
     id: number,
     title: string,
     description: string,

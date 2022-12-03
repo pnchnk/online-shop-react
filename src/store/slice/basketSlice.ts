@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BasketItemsSlice } from "./type";
-import { BasketItems } from "../../types";
+import { BasketItem } from "../../types";
 
 const initialState: BasketItemsSlice = {
   basketItems: []
@@ -10,7 +10,7 @@ const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addToCart: (state, { payload }:PayloadAction<BasketItems>) => {
+    addToCart: (state, { payload }:PayloadAction<BasketItem>) => {
       let isInArray = false;
 
       // if the product is already exist in array

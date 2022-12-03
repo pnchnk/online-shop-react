@@ -8,7 +8,7 @@ export const productsApi = createApi({
         getAllProducts: builder.query<Products[], void>({
             query: () => 'products',
             transformResponse:(response: Products[]) => {
-                return response.filter(el => el.category === 'smartphones' || el.category === 'laptops').sort((a, b) => b.rating - a.rating)
+                return response?.filter(el => el.category === 'smartphones' || el.category === 'laptops').sort((a, b) => b.rating - a.rating)
             }
         }),
         getProduct: builder.query({

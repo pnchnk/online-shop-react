@@ -6,7 +6,7 @@ import {
     buttonMinus,
     inputOnChange,
 } from "../../store/slice/basketSlice";
-import "../shoppingCartCard/card.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef } from "react";

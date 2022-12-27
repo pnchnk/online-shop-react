@@ -25,12 +25,8 @@ function Product() {
     const { data } = useGetProductQuery(params?.id)
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            if(data){
-                return (
-                    setIsLoading(false)
-                )
-            }
+        const timer = setTimeout(() => {        
+            return setIsLoading(false);
         }, 400);
         return () => clearTimeout(timer);
       }, []);
